@@ -10,45 +10,86 @@
   background: #ffffff;
   box-shadow: 0 2px 8px 0 #0000001a;
   border-radius: 5px;
+  gap: 10px;
+  //margin-top: 20px;
 }
 
 .price {
   grid-area: price;
   color: #2196f3;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 24px;
   text-align: left;
+  align-self: center;
+  margin-left: 15px;
 }
 
 .airlines {
   grid-area: airlines;
+  margin-left: auto;
+}
+
+.info {
+  color: #4a4a4a;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: left;
 }
 
 .time-to {
   grid-area: timeTo;
+  color: #a0b0b9;
+  margin-left: 15px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .duration-to {
   grid-area: durationTo;
+  color: #a0b0b9;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
-.transfer-to {
+.transfers-to {
   grid-area: transferTo;
+  color: #a0b0b9;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .time-from {
   grid-area: timeFrom;
+  color: #a0b0b9;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .duration-from {
   grid-area: durationFrom;
+  color: #a0b0b9;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
-.transfer-from {
+.transfers-from {
   grid-area: transferFrom;
-}
-
-.airlines {
-  margin-left: auto;
+  color: #a0b0b9;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }

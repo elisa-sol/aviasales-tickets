@@ -7,7 +7,6 @@ function Ticket() {
     <div className={classes['ticket-container']}>
       {/*<div className={classes.line1}>*/}
       <div className={classes.price}>13 400 Р</div>
-      <div></div>
       <div className={classes.airlines}>
         <img alt="airlines" src={img} />
       </div>

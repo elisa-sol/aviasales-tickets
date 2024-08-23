@@ -1,0 +1,54 @@
+.ticket-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    'price empty airlines'
+    'timeTo durationTo transferTo'
+    'timeFrom durationFrom transferFrom';
+  max-width: 502px;
+  min-height: 184px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px 0 #0000001a;
+  border-radius: 5px;
+}
+
+.price {
+  grid-area: price;
+  color: #2196f3;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+}
+
+.airlines {
+  grid-area: airlines;
+}
+
+.time-to {
+  grid-area: timeTo;
+}
+
+.duration-to {
+  grid-area: durationTo;
+}
+
+.transfer-to {
+  grid-area: transferTo;
+}
+
+.time-from {
+  grid-area: timeFrom;
+}
+
+.duration-from {
+  grid-area: durationFrom;
+}
+
+.transfer-from {
+  grid-area: transferFrom;
+}
+
+.airlines {
+  margin-left: auto;
+}

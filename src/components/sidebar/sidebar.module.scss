@@ -10,16 +10,17 @@
   color: #4a4a4a;
 }
 
-.amount-transfers {
+.sidebar-transfers {
   padding-left: 15px;
   padding-top: 15px;
+  padding-right: 20px;
   font-size: 12px;
   line-height: 12px;
   letter-spacing: 0.5px;
   font-weight: 400;
 }
 
-.label {
+.sidebar-label {
   padding-left: 15px;
   font-size: 13px;
   line-height: 20px;
@@ -27,11 +28,11 @@
   cursor: pointer;
 }
 
-.label:hover {
+.sidebar-label:hover {
   background: #f1fcff;
 }
 
-.checkbox {
+.sidebar-checkbox {
   appearance: none;
   position: relative;
   width: 20px;
@@ -44,12 +45,12 @@
   padding-right: 15px;
 }
 
-.checkbox:checked {
+.sidebar-checkbox:checked {
   background-color: white;
   border: 1px solid #2196f3;
 }
 
-.checkbox:checked::after {
+.sidebar-checkbox:checked::after {
   content: '';
   position: absolute;
   left: 50%;

@@ -1,0 +1,36 @@
+.header-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid #dfe5ec;
+  border-radius: 5px;
+  background: #ffffff;
+  overflow: hidden;
+  height: 50px;
+  max-width: 502px;
+}
+
+.header-title {
+  color: #4a4a4a;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 15px;
+}
+
+.header-title:nth-child(2) {
+  border-right: 1px solid #dfe5ec;
+  border-left: 1px solid #dfe5ec;
+}
+
+.header-title-selected {
+  background: #2196f3;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 15px;
+}

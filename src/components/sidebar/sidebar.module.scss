@@ -1,0 +1,62 @@
+.sidebar-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 232px;
+  min-height: 252px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px 0 #0000001a;
+  border-radius: 5px;
+  text-align: left;
+  color: #4a4a4a;
+}
+
+.amount-transfers {
+  padding-left: 15px;
+  padding-top: 15px;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+.label {
+  padding-left: 15px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.label:hover {
+  background: #f1fcff;
+}
+
+.checkbox {
+  appearance: none;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid #9abbce;
+  background-color: white;
+  cursor: pointer;
+  transform: translate(0%, 40%);
+  padding-right: 15px;
+}
+
+.checkbox:checked {
+  background-color: white;
+  border: 1px solid #2196f3;
+}
+
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -70%) rotate(-45deg) scaleX(-1);
+  width: 10px;
+  height: 5px;
+  border: solid #2196f3;
+  border-width: 0 2px 2px 0;
+}

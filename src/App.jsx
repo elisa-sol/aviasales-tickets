@@ -4,6 +4,7 @@ import Logo from './components/logo-aviasales/logo-aviasales';
 import Sidebar from './components/sidebar/sidebar';
 import Header from './components/header/header';
 import Ticket from './components/ticket/ticket';
+import Footer from './components/footer/footer';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <div className={classes['header-ticket']}>
           <Header />
           <Ticket />
+          <Footer />
         </div>
       </div>
     </div>

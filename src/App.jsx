@@ -9,9 +9,9 @@ function App() {
   return (
     <div className={classes.app}>
       <Logo />
-      <div className={classes['sidebar-header']}>
+      <div className={classes['sidebar-main']}>
         <Sidebar />
-        <div>
+        <div className={classes['header-ticket']}>
           <Header />
           <Ticket />
         </div>

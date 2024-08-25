@@ -1,4 +1,4 @@
-.expand {
+.footer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,10 +7,12 @@
   color: #fff;
   max-width: 502px;
   min-height: 50px;
+  height: 100%;
   border: 1px solid #dfe5ec;
   border-radius: 5px;
   font-size: 12px;
   line-height: 20px;
   letter-spacing: 0.5px;
   font-weight: 400;
+  width: 100%;
 }

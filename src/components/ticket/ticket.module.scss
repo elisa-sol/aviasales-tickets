@@ -6,12 +6,12 @@
     'timeTo durationTo transferTo'
     'timeFrom durationFrom transferFrom';
   max-width: 502px;
-  min-height: 184px;
+  //height: 184px;
+  height: 100%;
   background: #ffffff;
   box-shadow: 0 2px 8px 0 #0000001a;
   border-radius: 5px;
-  gap: 10px;
-  //margin-top: 20px;
+  gap: 5px;
 }
 
 .price {
@@ -69,7 +69,7 @@
   grid-area: timeFrom;
   color: #a0b0b9;
   margin-left: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.5px;

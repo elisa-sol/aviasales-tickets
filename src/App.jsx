@@ -18,7 +18,9 @@ function App() {
           <Footer />
         </div>
       </div>
+      <div className={classes['footer-container']}></div>
     </div>
   );
 }
+
 export default App;

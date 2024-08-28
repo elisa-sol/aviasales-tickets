@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFilter } from '../../redux/actions';
 import classes from './sidebar.module.scss';
 
 function Sidebar() {

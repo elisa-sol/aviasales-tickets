@@ -1,8 +1,8 @@
-import { SET_SORTING, TOGGLE_FILTER } from './actions';
+import { SET_SORTING, TOGGLE_CHECKBOX } from './actions';
 
 const initialState = {
-  sorting: 'cheap',
-  filters: {
+  sorting: 'CHEAPEST',
+  checkboxes: {
     all: false,
     zero: false,
     one: false,
@@ -11,32 +11,37 @@ const initialState = {
   },
 };
 
-const filtersReducer = (action, state = initialState) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SORTING:
       return {
         ...state,
         sorting: action.payload,
       };
-    case TOGGLE_FILTER:
-      const filterName = action.payload;
-      const newFilters = { ...state.filters };
 
-      if (filterName === 'all') {
-        const allSelected = !newFilters.all;
-        Object.keys(newFilters).forEach((key) => (newFilters[key] = allSelected));
-      } else {
-        newFilters[filterName] = !newFilters[filterName];
-        newFilters.all = Object.values(newFilters).slice(1).every(Boolean);
-      }
-
+    case TOGGLE_CHECKBOX:
+      const checkboxName = action.payload;
+      const isAllChecked = checkboxName === 'all';
+      const newCheckboxes = isAllChecked
+        ? {
+            all: !state.checkboxes.all,
+            zero: !state.checkboxes.all,
+            one: !state.checkboxes.all,
+            two: !state.checkboxes.all,
+            three: !state.checkboxes.all,
+          }
+        : {
+            ...state.checkboxes,
+            [checkboxName]: !state.checkboxes[checkboxName],
+            all: false,
+          };
       return {
         ...state,
-        filters: newFilters,
+        checkboxes: newCheckboxes,
       };
     default:
       return state;
   }
 };
 
-export default filtersReducer;
+export default rootReducer;

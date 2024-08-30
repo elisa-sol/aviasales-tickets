@@ -15,7 +15,6 @@ function App() {
         <div className={classes['header-ticket']}>
           <Header />
           <TicketsList />
-          <Footer />
         </div>
       </div>
       <div className={classes['footer-container']}></div>

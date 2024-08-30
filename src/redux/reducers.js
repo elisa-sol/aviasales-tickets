@@ -1,19 +1,26 @@
-import { SET_SORTING, TOGGLE_CHECKBOX } from './actions';
-import { GET_ID, GET_TICKETS, STOP_SEARCH, ERROR_LOADING } from './ticketsActions';
+import {
+  SET_SORTING,
+  TOGGLE_CHECKBOX,
+  SHOW_MORE_TICKETS,
+  SORT_BY_PRICE,
+  SORT_BY_DURATION,
+  SORT_BY_OPTIMAL,
+} from './actions';
+import { GET_ID, GET_TICKETS, STOP_SEARCH } from './ticketsActions';
 
 const initialState = {
   sorting: 'CHEAPEST',
   checkboxes: {
-    all: false,
-    zero: false,
-    one: false,
-    two: false,
-    three: false,
+    all: true,
+    zero: true,
+    one: true,
+    two: true,
+    three: true,
   },
   searchId: null,
   tickets: [],
   loading: false,
-  error: null,
+  visibleTicketsCount: 5,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,6 +29,41 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sorting: action.payload,
+      };
+
+    case SHOW_MORE_TICKETS:
+      return {
+        ...state,
+        visibleTicketsCount: state.visibleTicketsCount + 5,
+      };
+
+    case SORT_BY_PRICE:
+      const sortedPrice = [...state.tickets].sort((a, b) => a.price - b.price);
+      return {
+        ...state,
+        tickets: sortedPrice,
+      };
+
+    case SORT_BY_DURATION:
+      const sortedDuration = [...state.tickets].sort((a, b) => {
+        const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        return durationA - durationB;
+      });
+      return {
+        ...state,
+        tickets: sortedDuration,
+      };
+
+    case SORT_BY_OPTIMAL:
+      const sortedOptimal = [...state.tickets].sort((a, b) => {
+        const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        return a.price + durationA - (b.price + durationB);
+      });
+      return {
+        ...state,
+        tickets: sortedOptimal,
       };
 
     case TOGGLE_CHECKBOX:
@@ -51,26 +93,18 @@ const rootReducer = (state = initialState, action) => {
         searchId: action.searchId,
         tickets: [],
         stop: false,
-        error: null,
       };
 
     case GET_TICKETS:
       return {
         ...state,
         tickets: [...state.tickets, ...action.tickets],
-        error: null,
       };
 
     case STOP_SEARCH:
       return {
         ...state,
         stop: true,
-      };
-
-    case ERROR_LOADING:
-      return {
-        ...state,
-        error: action.error,
       };
 
     default:

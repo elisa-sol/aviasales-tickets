@@ -1,50 +1,3 @@
-// import React from 'react';
-// import classes from './ticket.module.scss';
-//
-// function Ticket({ ticket }) {
-//   const { price, carrier, segments } = ticket;
-//   const [segmentTo, segmentFrom] = segments;
-//
-//   return (
-//     <div className={classes['ticket-container']}>
-//       <div className={classes.price}>{price} P</div>
-//       <div className={classes.airlines}>{carrier}</div>
-//
-//       <div className={classes['time-to']}>
-//         {segmentTo.origin}-{segmentTo.destination}
-//         <div className={classes.info}>{segmentTo.date}</div>
-//       </div>
-//
-//       <div className={classes['duration-to']}>
-//         В ПУТИ
-//         <div className={classes.info}>{segmentTo.duration}</div>
-//       </div>
-//
-//       <div className={classes['transfers-to']}>
-//         {segmentTo.stops.length} ПЕРЕСАДКИ
-//         <div className={classes.info}>{segmentTo.stops.join(', ')}</div>
-//       </div>
-//       {/**/}
-//       <div className={classes['time-from']}>
-//         {segmentFrom.origin}-{segmentFrom.destination}
-//         <div className={classes.info}>{segmentFrom.date}</div>
-//       </div>
-//
-//       <div className={classes['duration-from']}>
-//         В ПУТИ
-//         <div className={classes.info}>{segmentFrom.duration}</div>
-//       </div>
-//
-//       <div className={classes['transfers-from']}>
-//         {segmentFrom.stops.length} ПЕРЕСАДКИ
-//         <div className={classes.info}>{segmentFrom.stops.join(', ')}</div>
-//       </div>
-//     </div>
-//   );
-// }
-//
-// export default Ticket;
-
 import React from 'react';
 import { add, format } from 'date-fns';
 import classes from './ticket.module.scss';
@@ -72,8 +25,10 @@ function Ticket({ ticket }) {
 
   return (
     <div className={classes['ticket-container']}>
-      <div className={classes.price}>{price} P</div>
-      <div className={classes.airlines}>{carrier}</div>
+      <div className={classes.price}>{price.toLocaleString()} P</div>
+      <div className={classes.airlines}>
+        <img src={`https://pics.avs.io/99/36/${carrier}.png`} alt={carrier} />
+      </div>
 
       <div className={classes['time-to']}>
         {segmentTo.origin} - {segmentTo.destination}

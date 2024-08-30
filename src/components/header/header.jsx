@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSorting } from '../../redux/actions';
+import { setSorting, sortByPrice, sortByDuration, sortByOptimal } from '../../redux/actions';
 import classes from './header.module.scss';
 
 function Header() {
@@ -9,6 +9,13 @@ function Header() {
 
   const handleSortChange = (type) => {
     dispatch(setSorting(type));
+    if (type === 'CHEAPEST') {
+      dispatch(sortByPrice());
+    } else if (type === 'FASTEST') {
+      dispatch(sortByDuration());
+    } else if (type === 'OPTIMAL') {
+      dispatch(sortByOptimal());
+    }
   };
 
   return (

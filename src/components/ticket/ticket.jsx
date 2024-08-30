@@ -44,29 +44,30 @@
 // }
 //
 // export default Ticket;
+
 import React from 'react';
-import { format, parseISO, addSeconds } from 'date-fns';
+import { add, format } from 'date-fns';
 import classes from './ticket.module.scss';
 
 function Ticket({ ticket }) {
   const { price, carrier, segments } = ticket;
   const [segmentTo, segmentFrom] = segments;
 
-  // Функция для форматирования времени в HH:mm
-  const formatTime = (date) => format(parseISO(date), 'HH:mm');
-
-  // Функция для вычисления конечного времени на основе продолжительности
-  const calculateEndTime = (startDate, duration) => {
-    const start = parseISO(startDate);
-    const end = addSeconds(start, duration);
-    return format(end, 'HH:mm');
+  const formatDuration = (duration) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    return `${hours}ч ${minutes}м`;
   };
 
-  // Функция для форматирования продолжительности из секунд в часы и минуты
-  const formatDuration = (duration) => {
-    const hours = Math.floor(duration / 3600);
-    const minutes = Math.floor((duration % 3600) / 60);
-    return `${hours}ч ${minutes}м`;
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    return format(date, 'HH:mm');
+  };
+
+  const addDurationToTime = (dateString, duration) => {
+    const date = new Date(dateString);
+    const newDate = add(date, { minutes: duration });
+    return format(newDate, 'HH:mm');
   };
 
   return (
@@ -77,7 +78,7 @@ function Ticket({ ticket }) {
       <div className={classes['time-to']}>
         {segmentTo.origin} - {segmentTo.destination}
         <div className={classes.info}>
-          {formatTime(segmentTo.date)} – {calculateEndTime(segmentTo.date, segmentTo.duration)}
+          {formatTime(segmentTo.date)} – {addDurationToTime(segmentTo.date, segmentTo.duration)}
         </div>
       </div>
 
@@ -87,14 +88,18 @@ function Ticket({ ticket }) {
       </div>
 
       <div className={classes['transfers-to']}>
-        {segmentTo.stops.length} ПЕРЕСАДКИ
+        {segmentTo.stops.length === 1
+          ? '1 ПЕРЕСАДКА'
+          : segmentTo.stops.length > 1
+            ? `${segmentTo.stops.length} ПЕРЕСАДКИ`
+            : 'БЕЗ ПЕРЕСАДОК'}
         <div className={classes.info}>{segmentTo.stops.join(', ')}</div>
       </div>
 
       <div className={classes['time-from']}>
         {segmentFrom.origin} - {segmentFrom.destination}
         <div className={classes.info}>
-          {formatTime(segmentFrom.date)} – {calculateEndTime(segmentFrom.date, segmentFrom.duration)}
+          {formatTime(segmentFrom.date)} – {addDurationToTime(segmentFrom.date, segmentFrom.duration)}
         </div>
       </div>
 
@@ -104,7 +109,11 @@ function Ticket({ ticket }) {
       </div>
 
       <div className={classes['transfers-from']}>
-        {segmentFrom.stops.length} ПЕРЕСАДКИ
+        {segmentFrom.stops.length === 1
+          ? '1 ПЕРЕСАДКА'
+          : segmentFrom.stops.length > 1
+            ? `${segmentFrom.stops.length} ПЕРЕСАДКИ`
+            : 'БЕЗ ПЕРЕСАДОК'}
         <div className={classes.info}>{segmentFrom.stops.join(', ')}</div>
       </div>
     </div>

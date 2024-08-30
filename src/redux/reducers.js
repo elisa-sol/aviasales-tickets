@@ -1,4 +1,5 @@
 import { SET_SORTING, TOGGLE_CHECKBOX } from './actions';
+import { GET_ID, GET_TICKETS, STOP_SEARCH, ERROR_LOADING } from './ticketsActions';
 
 const initialState = {
   sorting: 'CHEAPEST',
@@ -9,6 +10,10 @@ const initialState = {
     two: false,
     three: false,
   },
+  searchId: null,
+  tickets: [],
+  loading: false,
+  error: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -39,6 +44,35 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         checkboxes: newCheckboxes,
       };
+
+    case GET_ID:
+      return {
+        ...state,
+        searchId: action.searchId,
+        tickets: [],
+        stop: false,
+        error: null,
+      };
+
+    case GET_TICKETS:
+      return {
+        ...state,
+        tickets: [...state.tickets, ...action.tickets],
+        error: null,
+      };
+
+    case STOP_SEARCH:
+      return {
+        ...state,
+        stop: true,
+      };
+
+    case ERROR_LOADING:
+      return {
+        ...state,
+        error: action.error,
+      };
+
     default:
       return state;
   }

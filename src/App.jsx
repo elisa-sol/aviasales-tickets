@@ -3,8 +3,8 @@ import classes from './app.module.scss';
 import Logo from './components/logo-aviasales/logo-aviasales';
 import Sidebar from './components/sidebar/sidebar';
 import Header from './components/header/header';
-import Ticket from './components/ticket/ticket';
 import Footer from './components/footer/footer';
+import TicketsList from './components/ticketsList/ticketsList';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Sidebar />
         <div className={classes['header-ticket']}>
           <Header />
-          <Ticket />
+          <TicketsList />
           <Footer />
         </div>
       </div>

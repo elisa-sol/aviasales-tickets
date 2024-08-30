@@ -6,12 +6,13 @@
     'timeTo durationTo transferTo'
     'timeFrom durationFrom transferFrom';
   max-width: 502px;
-  //height: 184px;
-  height: 100%;
+  height: 184px;
+  //height: 100%;
   background: #ffffff;
   box-shadow: 0 2px 8px 0 #0000001a;
   border-radius: 5px;
   gap: 5px;
+  margin-bottom: 15px;
 }
 
 .price {

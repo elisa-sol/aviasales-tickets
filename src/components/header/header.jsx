@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { setSorting, sortByPrice, sortByDuration, sortByOptimal } from '../../redux/actions';
+
 import classes from './header.module.scss';
+import { setSorting, sortByPrice, sortByDuration, sortByOptimal } from '../../redux/actions';
 
 function Header() {
   const sorting = useSelector((state) => state.sorting);

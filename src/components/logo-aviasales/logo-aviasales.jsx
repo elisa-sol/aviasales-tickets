@@ -1,11 +1,12 @@
 import React from 'react';
-import img from '../../assets/logo.svg';
+
 import classes from './logo.module.scss';
+import img from '../../assets/logo.svg';
 
 function Logo() {
   return (
     <div className={classes['container-logo']}>
-      <img alt="plane" src={img} className={classes.logo}></img>
+      <img alt="plane" src={img} className={classes.logo} />
     </div>
   );
 }

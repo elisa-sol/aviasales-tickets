@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { add, format } from 'date-fns';
+import PropTypes from 'prop-types';
+
 import classes from './ticket.module.scss';
 
 function Ticket({ ticket }) {
@@ -74,5 +77,21 @@ function Ticket({ ticket }) {
     </div>
   );
 }
+
+Ticket.propTypes = {
+  ticket: PropTypes.shape({
+    price: PropTypes.number.isRequired,
+    carrier: PropTypes.string.isRequired,
+    segments: PropTypes.arrayOf(
+      PropTypes.shape({
+        origin: PropTypes.string.isRequired,
+        destination: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        duration: PropTypes.number.isRequired,
+        stops: PropTypes.arrayOf(PropTypes.string).isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+};
 
 export default Ticket;

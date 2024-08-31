@@ -19,8 +19,48 @@ const initialState = {
   },
   searchId: null,
   tickets: [],
-  loading: false,
+  filteredTickets: [],
   visibleTicketsCount: 5,
+  isLoading: true,
+  isComplete: false,
+  stop: false,
+};
+
+const filterTickets = (tickets, checkboxes) => {
+  if (checkboxes.all) {
+    return tickets;
+  }
+
+  return tickets.filter((ticket) => {
+    const stopsCounts = ticket.segments.map((segment) => segment.stops.length);
+    return (
+      (checkboxes.zero && stopsCounts.includes(0)) ||
+      (checkboxes.one && stopsCounts.includes(1)) ||
+      (checkboxes.two && stopsCounts.includes(2)) ||
+      (checkboxes.three && stopsCounts.includes(3))
+    );
+  });
+};
+
+const sortedTickets = (tickets, sorting) => {
+  switch (sorting) {
+    case 'CHEAPEST':
+      return [...tickets].sort((a, b) => a.price - b.price);
+    case 'FASTEST':
+      return [...tickets].sort((a, b) => {
+        const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        return durationA - durationB;
+      });
+    case 'OPTIMAL':
+      return [...tickets].sort((a, b) => {
+        const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
+        return a.price + durationA - (b.price + durationB);
+      });
+    default:
+      return tickets;
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,6 +69,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sorting: action.payload,
+        filteredTickets: sortedTickets(state.filteredTickets, action.payload),
       };
 
     case SHOW_MORE_TICKETS:
@@ -38,33 +79,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case SORT_BY_PRICE:
-      const sortedPrice = [...state.tickets].sort((a, b) => a.price - b.price);
-      return {
-        ...state,
-        tickets: sortedPrice,
-      };
+      return state;
 
     case SORT_BY_DURATION:
-      const sortedDuration = [...state.tickets].sort((a, b) => {
-        const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
-        const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
-        return durationA - durationB;
-      });
-      return {
-        ...state,
-        tickets: sortedDuration,
-      };
+      return state;
 
     case SORT_BY_OPTIMAL:
-      const sortedOptimal = [...state.tickets].sort((a, b) => {
-        const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
-        const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
-        return a.price + durationA - (b.price + durationB);
-      });
-      return {
-        ...state,
-        tickets: sortedOptimal,
-      };
+      return state;
 
     case TOGGLE_CHECKBOX:
       const checkboxName = action.payload;
@@ -82,9 +103,12 @@ const rootReducer = (state = initialState, action) => {
             [checkboxName]: !state.checkboxes[checkboxName],
             all: false,
           };
+
+      const filteredTickets = filterTickets(state.tickets, newCheckboxes);
       return {
         ...state,
         checkboxes: newCheckboxes,
+        filteredTickets: sortedTickets(filteredTickets, state.sorting),
       };
 
     case GET_ID:
@@ -93,18 +117,26 @@ const rootReducer = (state = initialState, action) => {
         searchId: action.searchId,
         tickets: [],
         stop: false,
+        isLoading: true,
+        isComplete: false,
       };
 
     case GET_TICKETS:
+      const updatedTickets = [...state.tickets, ...action.tickets];
+      const filteredAfterNewTickets = filterTickets(updatedTickets, state.checkboxes);
       return {
         ...state,
-        tickets: [...state.tickets, ...action.tickets],
+        tickets: updatedTickets,
+        filteredTickets: sortedTickets(filteredAfterNewTickets, state.sorting),
+        isLoading: !state.stop,
       };
 
     case STOP_SEARCH:
       return {
         ...state,
         stop: true,
+        isLoading: false,
+        isComplete: true,
       };
 
     default:

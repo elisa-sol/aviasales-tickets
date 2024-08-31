@@ -1,4 +1,6 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
 import classes from './footer.module.scss';
 
 function Footer({ onShowMore }) {
@@ -8,5 +10,9 @@ function Footer({ onShowMore }) {
     </div>
   );
 }
+
+Footer.propTypes = {
+  onShowMore: PropTypes.func.isRequired,
+};
 
 export default Footer;

@@ -22,10 +22,10 @@ export const getTickets = (searchId) => async (dispatch) => {
   } catch (error) {
     if (error instanceof Error) {
       if (Number.isNaN(Number(error.name))) {
-        throw new Error(`getTickets error: ${error.message}`);
+        console.log('getTickets error: При выполнении запроса возникла ошибка');
       }
     }
-    throw error;
+    dispatch(getTickets(searchId));
   }
 };
 

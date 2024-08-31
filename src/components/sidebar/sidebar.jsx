@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleCheckbox } from '../../redux/actions';
+
 import classes from './sidebar.module.scss';
+import { toggleCheckbox } from '../../redux/actions';
 
 function Sidebar() {
   const checkboxes = useSelector((state) => state.checkboxes);

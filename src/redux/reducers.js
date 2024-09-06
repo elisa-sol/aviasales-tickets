@@ -42,27 +42,6 @@ const filterTickets = (tickets, checkboxes) => {
   });
 };
 
-// const sortedTickets = (tickets, sorting) => {
-//   switch (sorting) {
-//     case 'CHEAPEST':
-//       return [...tickets].sort((a, b) => a.price - b.price);
-//     case 'FASTEST':
-//       return [...tickets].sort((a, b) => {
-//         const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
-//         const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
-//         return durationA - durationB;
-//       });
-//     case 'OPTIMAL':
-//       return [...tickets].sort((a, b) => {
-//         const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
-//         const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
-//         return a.price + durationA - (b.price + durationB);
-//       });
-//     default:
-//       return tickets;
-//   }
-// };
-
 const sortedTickets = (tickets, sorting) => {
   switch (sorting) {
     case 'CHEAPEST':

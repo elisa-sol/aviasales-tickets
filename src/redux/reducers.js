@@ -42,6 +42,27 @@ const filterTickets = (tickets, checkboxes) => {
   });
 };
 
+// const sortedTickets = (tickets, sorting) => {
+//   switch (sorting) {
+//     case 'CHEAPEST':
+//       return [...tickets].sort((a, b) => a.price - b.price);
+//     case 'FASTEST':
+//       return [...tickets].sort((a, b) => {
+//         const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
+//         const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
+//         return durationA - durationB;
+//       });
+//     case 'OPTIMAL':
+//       return [...tickets].sort((a, b) => {
+//         const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
+//         const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
+//         return a.price + durationA - (b.price + durationB);
+//       });
+//     default:
+//       return tickets;
+//   }
+// };
+
 const sortedTickets = (tickets, sorting) => {
   switch (sorting) {
     case 'CHEAPEST':
@@ -52,12 +73,22 @@ const sortedTickets = (tickets, sorting) => {
         const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
         return durationA - durationB;
       });
-    case 'OPTIMAL':
+    case 'OPTIMAL': {
+      const minPrice = Math.min(...tickets.map((ticket) => ticket.price));
+      const minDuration = Math.min(
+        ...tickets.map((ticket) => ticket.segments.reduce((sum, segment) => sum + segment.duration, 0))
+      );
+
       return [...tickets].sort((a, b) => {
         const durationA = a.segments.reduce((sum, segment) => sum + segment.duration, 0);
         const durationB = b.segments.reduce((sum, segment) => sum + segment.duration, 0);
-        return a.price + durationA - (b.price + durationB);
+
+        const scoreA = a.price / minPrice + durationA / minDuration;
+        const scoreB = b.price / minPrice + durationB / minDuration;
+
+        return scoreA - scoreB;
       });
+    }
     default:
       return tickets;
   }
@@ -103,6 +134,12 @@ const rootReducer = (state = initialState, action) => {
             [checkboxName]: !state.checkboxes[checkboxName],
             all: false,
           };
+
+      const areAllChecked = newCheckboxes.zero && newCheckboxes.one && newCheckboxes.two && newCheckboxes.three;
+
+      if (areAllChecked) {
+        newCheckboxes.all = true;
+      }
 
       const filteredTickets = filterTickets(state.tickets, newCheckboxes);
       return {
